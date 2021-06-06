@@ -21,3 +21,30 @@ mv ${name}* ../"
 cd ../
 done
 #Quality control, using Fastp software
+
+for i in *_1.clean.fq.gz;do
+name=${i%_*}
+mkdir ${name}_
+cd ${name}_
+hisat2 -p 5 --dta -x ~/ly/peptide/zhushi/m_hisat2/M_index -1 ../${name}_1.clean.fq.gz -2 ../${name}_2.clean.fq.gz -S ${name}.sam; 
+samtools sort -@ 5 -o ${name}_sorted.bam ${name}.sam; 
+cufflinks ${name}_sorted.bam -G ~/ly/peptide/zhushi/maize_merge.gtf -p 5 -L ${name}_cuff;
+mv genes.fpkm_tracking ${name}.txt
+cd ../
+done
+#Mapping and calculate genes' expression level
+#
+
+for i in *txt;do
+name=${i%.txt}
+awk 'BEGIN{FS="\t";print gene"\t"${name}}{if($0!~"FPKM"){print $1,$10}}' $i > ${name}.express.txt
+done
+#将输出的表达量文件改成我们需要的格式，第一列：基因名，第二列：表达量（FPKM）
+
+string="";
+for i in *.txt;do 
+string=${string}" "${i}
+done
+
+python3 zzz_merge.py $string
+#把每个基因的表达量合并在一起
