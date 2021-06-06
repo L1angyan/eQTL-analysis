@@ -40,11 +40,10 @@ name=${i%.txt}
 awk 'BEGIN{FS="\t";print gene"\t"${name}}{if($0!~"FPKM"){print $1,$10}}' $i > ${name}.express.txt
 done
 #将输出的表达量文件改成我们需要的格式，第一列：基因名，第二列：表达量（FPKM）
-
 string="";
 for i in *.txt;do 
 string=${string}" "${i}
 done
-
 python3 zzz_merge.py $string
 #把每个基因的表达量合并在一起
+#得到一个矩阵，每行是不同的基因，每列时不同品系，其中元素为某基因再该品系中的表达量
