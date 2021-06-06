@@ -7,5 +7,7 @@ for i in f:
     df1 = pd.read_table(i,sep="\t")
     df = pd.merge(df,df1,how="inner",on="gene")
 
-
-(df.T).to_csv("zzz_368.txt",sep="\t",index=None)
+df = df.T
+for i in range(1,len(df.columns)):
+    name=df.columns[i]+".txt"
+    df.iloc[:,[0,0,i].to_csv(name,sep="\t",index=None,header=None)
