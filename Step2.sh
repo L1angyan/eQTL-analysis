@@ -56,3 +56,5 @@ done
 #删除admixture.10.Q的最后一列并给它加上表头以便后续使用
 Rscript merge_cov.R
 #合并家系性别信息和群体结构信息，制作协变量文件emmax.cov.txt
+#现在得到了：emmax_genotype.tped, emmax_genotype.tfam等标记文件，emmax.cov.txt协变量文件，emmax_genotype.BN.kinf亲缘关系文件
+#结合表型数据：各品系基因表达量，即可进行全基因组关联分析。
