@@ -26,7 +26,7 @@ done
 awk 'BEGIN{FS="\t"}{if($3=="gene"){print $0}}' ~/ref/Zea_mays.B73_RefGen_v4.50.gtf > gene.txt
 #将基因组注释中的基因注释提取出来
 for i in `awk 'BEGIN{FS="\t"}{print $1}' eQTL.txt`;do
-grep $i gene.txt|awk 'BEGIN{FS="\t"}{print "'"${i}"'",$4,$5}' >> position.txt
+grep $i gene.txt|awk 'BEGIN{FS="\t"}{print "'"${i}"'",$1,$4,$5}' >> position.txt
 done
 #将基因的起始终止位置都提取出来放到position.txt里面
 python3 merge.py
