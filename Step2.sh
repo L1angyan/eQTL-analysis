@@ -54,3 +54,5 @@ for i in `awk 'BEGIN{FS="\t"}{print $1}' admixture.ped`;do
 awk 'BEGIN{FS="\t";OFS="\t"}{print "'"${i}"'"}{for(j=1;j<=9;j++){print $j}}' >> 10.Q
 done
 #删除admixture.10.Q的最后一列并给它加上表头以便后续使用
+Rscript merge_cov.R
+#合并家系性别信息和群体结构信息，制作协变量文件emmax.cov.txt
