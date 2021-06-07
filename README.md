@@ -19,7 +19,7 @@ Merge expression level of each gene in different samples to one file.
 Filter marks of 368 maize inbred lines
 
 # Step3
-Using Genome-wide association stduy, identify significant marks for eacho genes.
+Using Genome-wide association stduy, identify significant marks potentially regulating expression of each genes.
 
 # Step4
 Visualization using R.
